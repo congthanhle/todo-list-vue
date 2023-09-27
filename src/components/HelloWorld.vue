@@ -31,6 +31,11 @@ const count = ref(0)
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
+<!-- The `<style scoped>` block is used to apply styles to the elements within the template, but only
+within the scope of the current component. This means that the styles defined inside the `<style
+scoped>` block will only affect the elements in the current component and will not leak out to other
+components or the global styles.-->
+
 <style scoped>
 .read-the-docs {
   color: #888;
