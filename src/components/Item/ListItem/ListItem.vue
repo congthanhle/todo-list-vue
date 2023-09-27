@@ -11,18 +11,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in items">
-                    <td class="text-center">{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td class="text-center">
-                        <span v-if="item.level === 0" class="label label-default">Low</span>
-                        <span v-else-if="item.level === 1" class="label label-info">Medium</span>
-                        <span v-else-if="item.level === 2" class="label label-danger">High</span>      
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-warning btn-sm marginR5">Edit</button>
-                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                    </td>
+                <tr v-for="item in newItem" :key="item.id">
+                    <Item :item=item></Item>
+
                 </tr>
             </tbody>
         </table>
@@ -30,7 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import { items } from "../../../data.ts"
+// import { ref } from 'vue';
+// import { items as Items } from "../../../data.ts";
+import Item from "../Item/Item.vue";
+import { ItemType } from '../../../types/item';
+// const items = ref(Items);
+
+const props = defineProps<{
+    newItem: ItemType[]
+}>()
+
+console.log(props.newItem);
+
 
 </script>
 

@@ -1,24 +1,41 @@
+<script setup lang="ts">
+import { ref, defineEmits  } from 'vue';
+
+const emit = defineEmits();
+// Init value for formData
+const formData = ref({
+    name: '',
+    level: '1',
+});
+// Function handle submit form
+const handleSubmit = () => {
+    const { name, level } = formData.value;
+    emit('sendNewItem', {name, level});
+}
+const handleClearForm = () => {
+    formData.value.name = '';
+    const visibleForm = false;
+    emit('cancelAddItem', visibleForm);
+}
+
+</script>
 <template>
     <div>
-        <form class="form-inline">
+        <form class="form-inline" @submit.prevent="handleSubmit">
             <div class="form-group marginR5 ">
-                <input type="text" class="form-control" placeholder="Item Name" />
+                <input type="text" class="form-control" placeholder="Item Name" v-model="formData.name" />
             </div>
             <div class="form-group">
-                <select class="form-control marginR5 ">
-                    <option v-bind:value="`${0}`">Small</option>
-                    <option v-bind:value="2">Medium</option>
-                    <option v-bind:value="3">High</option>
+                <select class="form-control marginR5 " v-model="formData.level">
+                    <option :value="0">Low</option>
+                    <option :value="1">Medium</option>
+                    <option :value="2">High</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary marginR5 ">Submit</button>
-            <button type="button" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary marginR5 ">Submit</button>
+            <button type="button" class="btn btn-default" @click="handleClearForm">Cancel</button>
         </form>
     </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style scoped></style>
