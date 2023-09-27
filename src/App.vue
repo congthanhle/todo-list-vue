@@ -1,26 +1,35 @@
 <script setup lang="ts">
 import Title from "./components/Title/Title.vue";
+import Search from "./components/Search/Search.vue";
+import Sort from "./components/Sort/Sort.vue";
+import Form from "./components/Form/Form.vue";
+import ListItem from "./components/Item/ListItem/ListItem.vue";
+
 </script>
 
 <template>
   <div class="container">
-    <Title></Title>
+    <Title />
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <Search />
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <Sort />
+      </div>
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <button type="button" class="btn btn-info btn-block marginB10">Add Item</button>
+      </div>
+    </div>
+    <div class="row marginB10">
+      <div class="col-md-offset-7 col-md-5">
+        <Form />
+      </div>
+    </div>
+    <ListItem />
   </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>

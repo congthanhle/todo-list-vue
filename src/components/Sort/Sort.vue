@@ -1,17 +1,17 @@
 <template>
-    <div className="dropdown">
-        <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle marginR5 " type="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="true">
-            Sort by <span className="caret" />
+            Sort by <span class="caret" />
         </button>
-        <ul className="dropdown-menu">
+        <ul class="dropdown-menu">
             <li><a role="button">Name ASC</a></li>
             <li><a role="button">Name DESC</a></li>
-            <li role="separator" className="divider" />
+            <li role="separator" class="divider" />
             <li><a role="button">Level ASC</a></li>
             <li><a role="button">Level DESC</a></li>
         </ul>
-        <span className="label label-success label-medium">NAME - DESC</span>
+        <span class="label label-success label-medium">NAME - DESC</span>
     </div>
 </template>
 
