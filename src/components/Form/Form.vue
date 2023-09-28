@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, defineEmits  } from 'vue';
+import { ref, defineEmits } from 'vue';
 
-const emit = defineEmits();
+const emit = defineEmits(["sendNewItem", "cancelAddItem"]);
 // Init value for formData
 const formData = ref({
     name: '',
@@ -10,7 +10,7 @@ const formData = ref({
 // Function handle submit form
 const handleSubmit = () => {
     const { name, level } = formData.value;
-    emit('sendNewItem', {name, level});
+    emit('sendNewItem', { name, level });
 }
 const handleClearForm = () => {
     formData.value.name = '';

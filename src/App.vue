@@ -8,15 +8,15 @@ import ListItem from "./components/Item/ListItem/ListItem.vue";
 import {ItemType} from "./types/item.ts";
 import { items } from "./data";
 
-const isButtonVisible = ref(true);
+const isAddFormVisible = ref(false);
 const newItems = ref<ItemType[]>(items)
 
 const handleToggleAddBtn = () => {
-  isButtonVisible.value = !isButtonVisible.value;
+  isAddFormVisible.value = !isAddFormVisible.value;
 };
 
 const handleHideAddForm = (isVisible: boolean) => {
-  isButtonVisible.value = isVisible
+  isAddFormVisible.value = isVisible
 }
 
 const getNewItem = (item: ItemType) => {
@@ -28,9 +28,6 @@ const getNewItem = (item: ItemType) => {
     }
     newItems.value.push(newItem);
 }
-
-
-
 </script>
 
 <template>
@@ -49,11 +46,13 @@ const getNewItem = (item: ItemType) => {
     </div>
     <div class="row marginB10">
       <div class="col-md-offset-7 col-md-5">
-        <Form v-if="isButtonVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm"/>
+        <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm"/>
       </div>
     </div>
-    <ListItem :newItem="newItems"/>
+    <ListItem :newItems="newItems"/>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

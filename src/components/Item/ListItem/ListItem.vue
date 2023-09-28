@@ -1,3 +1,23 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import Item from "../Item/Item.vue";
+import { ItemType } from '../../../types/item';
+
+const props = defineProps<{
+    newItems: ItemType[]
+}>()
+
+const items = ref<ItemType[]>(props.newItems);
+
+const handleDeleteItem = (itemId: number) => {
+    items.value = items.value.filter(item => item.id !== itemId)
+}
+
+const handleEditItem = (item: ItemType) => {
+    console.log(item)
+}
+
+</script>
 <template>
     <div class="panel panel-success">
         <div class="panel-heading">List Item</div>
@@ -11,29 +31,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in newItem" :key="item.id">
-                    <Item :item=item></Item>
-
-                </tr>
+                <Item v-for="item in items" :key="item.id" :item=item @sendIdDelItem="handleDeleteItem"
+                    @sendIdEditItem="handleEditItem"></Item>
             </tbody>
         </table>
     </div>
 </template>
-
-<script setup lang="ts">
-// import { ref } from 'vue';
-// import { items as Items } from "../../../data.ts";
-import Item from "../Item/Item.vue";
-import { ItemType } from '../../../types/item';
-// const items = ref(Items);
-
-const props = defineProps<{
-    newItem: ItemType[]
-}>()
-
-console.log(props.newItem);
-
-
-</script>
 
 <style scoped></style>
