@@ -21,7 +21,7 @@ export const items: Item[] = [
     },
     {
         id: 4,
-        name: "Gần 200 người chết vì tai nạn giao thông 7 ngày nghỉ Tết",
+        name: "Gần 200 người chết vì tai nạn giao thông 7 ngày nghỉ Tết U23",
         level: 0 // low
     },
     {

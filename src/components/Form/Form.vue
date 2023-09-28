@@ -11,6 +11,7 @@ const formData = ref({
 const handleSubmit = () => {
     const { name, level } = formData.value;
     emits('sendNewItem', { name, level });
+    formData.value.name = '';
 }
 const handleClearForm = () => {
     formData.value.name = '';
@@ -26,7 +27,7 @@ const handleClearForm = () => {
                 <input type="text" class="form-control" placeholder="Item Name" v-model="formData.name" />
             </div>
             <div class="form-group">
-                <select class="form-control marginR5 " v-model="formData.level">
+                <select class="form-control marginR5" v-model="formData.level">
                     <option :value="0">Low</option>
                     <option :value="1">Medium</option>
                     <option :value="2">High</option>

@@ -5,11 +5,13 @@ import Search from "./components/Search/Search.vue";
 import Sort from "./components/Sort/Sort.vue";
 import Form from "./components/Form/Form.vue";
 import ListItem from "./components/Item/ListItem/ListItem.vue";
-import {ItemType} from "./types/item.ts";
+import { ItemType } from "./types/item.ts";
 import { items } from "./data";
 
 const isAddFormVisible = ref(false);
-const newItems = ref<ItemType[]>(items)
+const newItems = ref<ItemType[]>(items);
+const filteredItems = ref<ItemType[]>([]);
+
 
 const handleToggleAddBtn = () => {
   isAddFormVisible.value = !isAddFormVisible.value;
@@ -20,14 +22,50 @@ const handleHideAddForm = (isVisible: boolean) => {
 }
 
 const getNewItem = (item: ItemType) => {
-    const newId = items.length + 1;
-    const newItem = {
-      id: newId,
-      name: item.name,
-      level: Number(item.level),
-    }
-    newItems.value.push(newItem);
+  const newId = items.length + 1;
+  const newItem = {
+    id: newId,
+    name: item.name,
+    level: Number(item.level)
+  }
+  newItems.value.push(newItem);
 }
+
+const filteredData = (query: string) => {
+  const searchQuery = query.toLowerCase();
+  filteredItems.value = items.filter((item) => {
+    return item.name.toLowerCase().includes(searchQuery);
+  });
+}
+
+const handleSortOption = (option: string) => {
+  switch (option) {
+    case "Name - ASC":
+      newItems.value.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      break;
+    case "Name - DESC":
+      newItems.value.sort((a, b) => {
+        return b.name.localeCompare(a.name);
+      });
+      break;
+    case "Level - ASC":
+      newItems.value.sort((a, b) => {
+        return a.level - b.level;
+      });
+      break;
+    case "Level - DESC":
+      newItems.value.sort((a, b) => {
+        return b.level - a.level;
+      });
+      break;
+    default:
+
+      break;
+  }
+}
+
 </script>
 
 <template>
@@ -35,10 +73,10 @@ const getNewItem = (item: ItemType) => {
     <Title />
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <Search />
+        <Search @sendSearchQuery="filteredData" />
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <Sort />
+        <Sort @sendSortOption="handleSortOption" />
       </div>
       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
         <button type="button" class="btn btn-info btn-block marginB10" @click="handleToggleAddBtn">Add Item</button>
@@ -46,13 +84,13 @@ const getNewItem = (item: ItemType) => {
     </div>
     <div class="row marginB10">
       <div class="col-md-offset-7 col-md-5">
-        <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm"/>
+        <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm" />
       </div>
     </div>
-    <ListItem :newItems="newItems"/>
+
+    <ListItem :newItems="newItems" :filteredItems="filteredItems" />
+
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

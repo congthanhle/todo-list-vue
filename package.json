@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "unicode": "^14.0.0",
+    "unidecode": "^0.1.8",
     "vue": "^3.3.4"
   },
   "devDependencies": {

@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Item from "../Item/Item.vue";
 import { ItemType } from '../../../types/item';
 
+
 const props = defineProps<{
     newItems: ItemType[]
+    filteredItems: ItemType[]
 }>()
 
-const items = ref<ItemType[]>(props.newItems);
+const items = ref<ItemType[]>(props.newItems.sort((a, b) => {
+        return b.name.localeCompare(a.name); // Sắp xếp theo tên giảm dần (DESC)
+      }));
+
+const itemsToDisplay = computed(() => {
+    return props.filteredItems.length !== 0 ? props.filteredItems : props.newItems;
+});
 
 const handleDeleteItem = (itemId: number) => {
     items.value = items.value.filter(item => item.id !== itemId)
@@ -18,8 +26,8 @@ const handleEditItem = (itemEdited: ItemType) => {
         item.id === itemEdited.id ? itemEdited : item
     ));
 }
-
 </script>
+
 <template>
     <div class="panel panel-success">
         <div class="panel-heading">List Item</div>
@@ -33,7 +41,7 @@ const handleEditItem = (itemEdited: ItemType) => {
                 </tr>
             </thead>
             <tbody>
-                <Item v-for="item in items" :key="item.id" :item=item @sendIdDelItem="handleDeleteItem"
+                <Item v-for="item in itemsToDisplay" :key="item.id" :item=item @sendIdDelItem="handleDeleteItem"
                     @sendEditItem="handleEditItem"></Item>
             </tbody>
         </table>
