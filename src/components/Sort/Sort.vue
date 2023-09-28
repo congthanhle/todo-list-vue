@@ -7,21 +7,21 @@ const emits = defineEmits(["sendSortOption"]);
 
 const handleSortOption = (value: string) => {
   switch (value) {
-    case "Name ASC":
+    case "1":
       labelText.value = "Name - ASC";
-      emits("sendSortOption", labelText.value);
+      emits("sendSortOption", value);
       break;
-    case "Name DESC":
+    case "2":
       labelText.value = "Name - DESC";
-      emits("sendSortOption", labelText.value);
+      emits("sendSortOption", value);
       break;
-    case "Level ASC":
+    case "3":
       labelText.value = "Level - ASC";
-      emits("sendSortOption", labelText.value);
+      emits("sendSortOption", value);
       break;
-    case "Level DESC":
+    case "4":
       labelText.value = "Level - DESC";
-      emits("sendSortOption", labelText.value);
+      emits("sendSortOption", value);
       break;
     default:
       labelText.value = "NAME - DESC";
@@ -43,11 +43,11 @@ const handleSortOption = (value: string) => {
         Sort by <span class="caret" />
       </button>
       <ul class="dropdown-menu">
-        <li><a @click="handleSortOption('Name ASC')" role="button">Name ASC</a></li>
-        <li><a @click="handleSortOption('Name DESC')" role="button">Name DESC</a></li>
+        <li><a @click="handleSortOption('1')" role="button">Name ASC</a></li>
+        <li><a @click="handleSortOption('2')" role="button">Name DESC</a></li>
         <li role="separator" class="divider" />
-        <li><a @click="handleSortOption('Level ASC')" role="button">Level ASC</a></li>
-        <li><a @click="handleSortOption('Level DESC')" role="button">Level DESC</a></li>
+        <li><a @click="handleSortOption('3')" role="button">Level ASC</a></li>
+        <li><a @click="handleSortOption('4')" role="button">Level DESC</a></li>
       </ul>
       <span class="label label-success label-medium">{{ labelText }}</span>
     </div>

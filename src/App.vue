@@ -40,22 +40,22 @@ const filteredData = (query: string) => {
 
 const handleSortOption = (option: string) => {
   switch (option) {
-    case "Name - ASC":
+    case "1":
       newItems.value.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
       break;
-    case "Name - DESC":
+    case "2":
       newItems.value.sort((a, b) => {
         return b.name.localeCompare(a.name);
       });
       break;
-    case "Level - ASC":
+    case "3":
       newItems.value.sort((a, b) => {
         return a.level - b.level;
       });
       break;
-    case "Level - DESC":
+    case "4":
       newItems.value.sort((a, b) => {
         return b.level - a.level;
       });
