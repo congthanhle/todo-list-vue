@@ -13,8 +13,10 @@ const handleDeleteItem = (itemId: number) => {
     items.value = items.value.filter(item => item.id !== itemId)
 }
 
-const handleEditItem = (item: ItemType) => {
-    console.log(item)
+const handleEditItem = (itemEdited: ItemType) => {
+    items.value = items.value.map((item: ItemType) => (
+        item.id === itemEdited.id ? itemEdited : item
+    ));
 }
 
 </script>
@@ -32,7 +34,7 @@ const handleEditItem = (item: ItemType) => {
             </thead>
             <tbody>
                 <Item v-for="item in items" :key="item.id" :item=item @sendIdDelItem="handleDeleteItem"
-                    @sendIdEditItem="handleEditItem"></Item>
+                    @sendEditItem="handleEditItem"></Item>
             </tbody>
         </table>
     </div>

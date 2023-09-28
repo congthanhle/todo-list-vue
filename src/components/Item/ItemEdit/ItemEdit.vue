@@ -1,31 +1,51 @@
+<script setup lang="ts">
+import { defineEmits, ref } from 'vue';
+import { ItemType } from '../../../types/item';
+
+const emits = defineEmits(["sendEditedItem", "cancelEditedItem"]);
+
+const props = defineProps<{
+    item: ItemType,
+}>()
+
+const formData = ref({
+    name: props.item.name,
+    level: props.item.level,
+});
+
+const handleSaveClick = () => {
+    const { name, level } = formData.value;
+    const id = props.item.id;
+    emits('sendEditedItem', { id, name, level });
+    handleCancelClick();
+}
+
+const handleCancelClick = () => {
+    emits('cancelEditedItem', false);
+}
+
+</script>
 <template>
     <tr>
         <td class="text-center">{{ item.id }}</td>
         <td>
-            <input type="text" class="form-control" :defaultValue="item.name" />
+            <input type="text" class="form-control" v-model="formData.name" />
         </td>
         <td class="text-center">
-            <select class="form-control" :value="item.level">
+            <select class="form-control" v-model="formData.level">
                 <option :value=0>Low</option>
                 <option :value=1>Medium</option>
                 <option :value=2>High</option>
             </select>
         </td>
         <td>
-            <button type="button" class="btn btn-default btn-sm">Cancel</button>
-            <button type="button" class="btn btn-success btn-sm">Save</button>
+            <button type="button" class="btn btn-default btn-sm marginR5" @click="handleCancelClick">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" @click="handleSaveClick">Save</button>
         </td>
 
     </tr>
 </template>
 
-<script setup lang="ts">
-import { ItemType } from '../../../types/item';
 
-defineProps<{
-    item: ItemType,
-}>()
-
-</script>
 
 <style scoped></style>

@@ -3,7 +3,7 @@ import { defineEmits, ref } from 'vue';
 import { ItemType } from '../../../types/item';
 import ItemEdit from '../ItemEdit/ItemEdit.vue';
 
-const emit = defineEmits(["sendIdDelItem", "sendIdEditItem"]);
+const emits = defineEmits(["sendIdDelItem", "sendEditItem"]);
 
 const props = defineProps<{
     item: ItemType
@@ -13,13 +13,18 @@ const isEditMode = ref(false);
 
 const handleDeleteClick = () => {
     const itemId = props.item.id;
-    emit('sendIdDelItem', itemId);
+    emits('sendIdDelItem', itemId);
 }
 
 const handleEditClick = () => {
     isEditMode.value = true;
-    const item = props.item
-    emit('sendIdEditItem', item);
+}
+const cancelEditItem = (isEdit: boolean) => {
+    isEditMode.value = isEdit;
+}
+
+const sendEditItem = (item: ItemType) => {
+    emits('sendEditItem', item);
 }
 
 </script>
@@ -38,7 +43,7 @@ const handleEditClick = () => {
             <button type="button" class="btn btn-danger btn-sm" @click="handleDeleteClick">Delete</button>
         </td>
     </tr>
-    <ItemEdit :item="item"   v-else/>
+    <ItemEdit :item="item"  @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else/>
 </template>
 
 
