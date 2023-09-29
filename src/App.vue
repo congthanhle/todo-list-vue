@@ -69,7 +69,7 @@ const handleSortOption = (option: string) => {
 
 <template>
   <div class="container">
-    <Title />
+    <Title/>
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <Search @sendSearchQuery="filteredData" />
@@ -91,3 +91,4 @@ const handleSortOption = (option: string) => {
 </template>
 
 <style scoped></style>
+./data-types/item.ts

@@ -50,4 +50,4 @@ const sendEditItem = (item: ItemType) => {
     <ItemEdit :item="item"  @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else/>
 </template>
 
-<style scoped></style>
+<style scoped></style>../../../data-types/item

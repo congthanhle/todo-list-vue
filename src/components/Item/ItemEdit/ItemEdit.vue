@@ -47,4 +47,4 @@ const handleCancelClick = () => {
     </tr>
 </template>
 
-<style scoped></style>
+<style scoped></style>../../../data-types/item
