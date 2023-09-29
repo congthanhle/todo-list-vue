@@ -2,17 +2,21 @@
 import { ref, defineEmits } from 'vue';
 
 const emits = defineEmits(["sendNewItem", "cancelAddItem"]);
-// Init value for formData
+
+// Initialize the initial value for form data
 const formData = ref({
     name: '',
     level: '1',
 });
-// Function handle submit form
-const handleSubmit = () => {
+
+// Handled when submitting the form
+const handleSubmitForm = () => {
     const { name, level } = formData.value;
     emits('sendNewItem', { name, level });
     formData.value.name = '';
 }
+
+// Operation to delete data on the form
 const handleClearForm = () => {
     formData.value.name = '';
     const visibleForm = false;
@@ -22,7 +26,7 @@ const handleClearForm = () => {
 </script>
 <template>
     <div>
-        <form class="form-inline" @submit.prevent="handleSubmit">
+        <form class="form-inline" @submit.prevent="handleSubmitForm">
             <div class="form-group marginR5 ">
                 <input type="text" class="form-control" placeholder="Item Name" v-model="formData.name" />
             </div>

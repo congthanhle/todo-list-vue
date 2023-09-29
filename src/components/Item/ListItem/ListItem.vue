@@ -3,29 +3,32 @@ import { ref, computed } from "vue";
 import Item from "../Item/Item.vue";
 import { ItemType } from '../../../types/item';
 
-
 const props = defineProps<{
     newItems: ItemType[]
     filteredItems: ItemType[]
 }>()
 
 const items = ref<ItemType[]>(props.newItems.sort((a, b) => {
-        return b.name.localeCompare(a.name); // Sắp xếp theo tên giảm dần (DESC)
-      }));
+    return b.name.localeCompare(a.name); 
+}));
 
+// Change the value displayed when filtering
 const itemsToDisplay = computed(() => {
     return props.filteredItems.length !== 0 ? props.filteredItems : props.newItems;
 });
 
+// Operation to handle item deletion
 const handleDeleteItem = (itemId: number) => {
-    items.value = items.value.filter(item => item.id !== itemId)
+    items.value = items.value.filter(item => item.id !== itemId);
 }
 
+// Processes updating the edited content
 const handleEditItem = (itemEdited: ItemType) => {
     items.value = items.value.map((item: ItemType) => (
         item.id === itemEdited.id ? itemEdited : item
     ));
 }
+
 </script>
 
 <template>

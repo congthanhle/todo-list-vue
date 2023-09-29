@@ -8,11 +8,12 @@ const props = defineProps<{
     item: ItemType,
 }>()
 
+// Assign the item's value to the form for editing
 const formData = ref({
     name: props.item.name,
     level: props.item.level,
 });
-
+// Handle the operation of saving data when pressing the Save button
 const handleSaveClick = () => {
     const { name, level } = formData.value;
     const id = props.item.id;
@@ -20,6 +21,7 @@ const handleSaveClick = () => {
     handleCancelClick();
 }
 
+// Handle the edit cancellation operation
 const handleCancelClick = () => {
     emits('cancelEditedItem', false);
 }
@@ -42,10 +44,7 @@ const handleCancelClick = () => {
             <button type="button" class="btn btn-default btn-sm marginR5" @click="handleCancelClick">Cancel</button>
             <button type="button" class="btn btn-success btn-sm" @click="handleSaveClick">Save</button>
         </td>
-
     </tr>
 </template>
-
-
 
 <style scoped></style>

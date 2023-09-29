@@ -5,6 +5,7 @@ const labelText = ref("NAME - DESC");
 
 const emits = defineEmits(["sendSortOption"]);
 
+// Send sorting requests to the parent component when options change
 const handleSortOption = (value: string) => {
   switch (value) {
     case "1":

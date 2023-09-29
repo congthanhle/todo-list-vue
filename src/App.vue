@@ -12,13 +12,12 @@ const isAddFormVisible = ref(false);
 const newItems = ref<ItemType[]>(items);
 const filteredItems = ref<ItemType[]>([]);
 
-
 const handleToggleAddBtn = () => {
   isAddFormVisible.value = !isAddFormVisible.value;
 };
 
 const handleHideAddForm = (isVisible: boolean) => {
-  isAddFormVisible.value = isVisible
+  isAddFormVisible.value = isVisible;
 }
 
 const getNewItem = (item: ItemType) => {
@@ -39,29 +38,29 @@ const filteredData = (query: string) => {
 }
 
 const handleSortOption = (option: string) => {
+  const items = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
   switch (option) {
     case "1":
-      newItems.value.sort((a, b) => {
+      items.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
       break;
     case "2":
-      newItems.value.sort((a, b) => {
+      items.sort((a, b) => {
         return b.name.localeCompare(a.name);
       });
       break;
     case "3":
-      newItems.value.sort((a, b) => {
+      items.sort((a, b) => {
         return a.level - b.level;
       });
       break;
     case "4":
-      newItems.value.sort((a, b) => {
+      items.sort((a, b) => {
         return b.level - a.level;
       });
       break;
     default:
-
       break;
   }
 }
@@ -87,9 +86,7 @@ const handleSortOption = (option: string) => {
         <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm" />
       </div>
     </div>
-
     <ListItem :newItems="newItems" :filteredItems="filteredItems" />
-
   </div>
 </template>
 

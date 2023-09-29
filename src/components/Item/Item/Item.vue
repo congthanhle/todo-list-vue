@@ -10,19 +10,23 @@ const props = defineProps<{
 }>()
 
 const isEditMode = ref(false);
-
+// Handle the action of pressing the delete button
 const handleDeleteClick = () => {
     const itemId = props.item.id;
     emits('sendIdDelItem', itemId);
 }
 
+// Turn on editing mode for the current item
 const handleEditClick = () => {
     isEditMode.value = true;
 }
+
+//Handle when pressing the cancel button
 const cancelEditItem = (isEdit: boolean) => {
     isEditMode.value = isEdit;
 }
 
+//Send the item to be edited to the parent component
 const sendEditItem = (item: ItemType) => {
     emits('sendEditItem', item);
 }
@@ -45,8 +49,5 @@ const sendEditItem = (item: ItemType) => {
     </tr>
     <ItemEdit :item="item"  @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else/>
 </template>
-
-
-
 
 <style scoped></style>
