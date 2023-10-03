@@ -5,7 +5,7 @@ import Search from "./components/Search/Search.vue";
 import Sort from "./components/Sort/Sort.vue";
 import Form from "./components/Form/Form.vue";
 import ListItem from "./components/Item/ListItem/ListItem.vue";
-import { ItemType } from "./types/item.ts";
+import { ItemType } from "./data-types/item";
 import { items } from "./data";
 
 const isAddFormVisible = ref(false);
