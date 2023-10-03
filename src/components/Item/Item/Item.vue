@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
-import { ItemType } from '../../../types/item';
+import { ItemType } from '../../../data-types/item';
 import ItemEdit from '../ItemEdit/ItemEdit.vue';
 
 const emits = defineEmits(["sendIdDelItem", "sendEditItem"]);
@@ -50,4 +50,4 @@ const sendEditItem = (item: ItemType) => {
     <ItemEdit :item="item"  @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else/>
 </template>
 
-<style scoped></style>../../../data-types/item
+<style scoped></style>

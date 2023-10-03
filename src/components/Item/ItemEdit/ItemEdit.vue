@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
-import { ItemType } from '../../../types/item';
-
+import { ItemType } from '../../../data-types/item'
 const emits = defineEmits(["sendEditedItem", "cancelEditedItem"]);
 
 const props = defineProps<{
@@ -47,4 +46,4 @@ const handleCancelClick = () => {
     </tr>
 </template>
 
-<style scoped></style>../../../data-types/item
+<style scoped></style>

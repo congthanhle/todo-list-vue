@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Item from "../Item/Item.vue";
-import { ItemType } from '../../../types/item';
+import { ItemType } from '../../../data-types/item';
 
 const props = defineProps<{
     newItems: ItemType[]
