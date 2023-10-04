@@ -5,7 +5,7 @@ import Search from "./components/Search/Search.vue";
 import Sort from "./components/Sort/Sort.vue";
 import Form from "./components/Form/Form.vue";
 import ListItem from "./components/Item/ListItem/ListItem.vue";
-import { ItemType } from "./data-types/item";
+import { ItemType } from "./data-types/item.ts";
 import { items } from "./data";
 
 const isAddFormVisible = ref(false);
@@ -38,25 +38,25 @@ const filteredData = (query: string) => {
 }
 
 const handleSortOption = (option: string) => {
-  const items = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
+  newItems.value = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
   switch (option) {
     case "1":
-      items.sort((a, b) => {
+      newItems.value.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
       break;
     case "2":
-      items.sort((a, b) => {
+    newItems.value.sort((a, b) => {
         return b.name.localeCompare(a.name);
       });
       break;
     case "3":
-      items.sort((a, b) => {
+    newItems.value.sort((a, b) => {
         return a.level - b.level;
       });
       break;
     case "4":
-      items.sort((a, b) => {
+    newItems.value.sort((a, b) => {
         return b.level - a.level;
       });
       break;
@@ -87,7 +87,7 @@ const handleSortOption = (option: string) => {
         <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm" />
       </div>
     </div>
-    <ListItem :newItems="newItems" :filteredItems="filteredItems" />
+    <ListItem :items="newItems" :filteredItems="filteredItems" />
   </div>
 </template>
 

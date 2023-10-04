@@ -4,17 +4,17 @@ import Item from "../Item/Item.vue";
 import { ItemType } from '../../../data-types/item';
 
 const props = defineProps<{
-    newItems: ItemType[]
+    items: ItemType[]
     filteredItems: ItemType[]
 }>()
 
-const items = ref<ItemType[]>(props.newItems.sort((a, b) => {
+const items = ref<ItemType[]>(props.items.sort((a, b) => {
     return b.name.localeCompare(a.name); 
 }));
 
 // Change the value displayed when filtering
 const itemsToDisplay = computed(() => {
-    return props.filteredItems.length !== 0 ? props.filteredItems : props.newItems;
+    return props.filteredItems.length !== 0 ? props.filteredItems : items.value;
 });
 
 // Operation to handle item deletion
@@ -27,6 +27,7 @@ const handleEditItem = (itemEdited: ItemType) => {
     items.value = items.value.map((item: ItemType) => (
         item.id === itemEdited.id ? itemEdited : item
     ));
+    
 }
 
 </script>
