@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
-import { ItemType } from '../../../data-types/item'
+import { ItemType } from 'src/data-types/item.ts'
 const emits = defineEmits(["sendEditedItem", "cancelEditedItem"]);
 
 const props = defineProps<{

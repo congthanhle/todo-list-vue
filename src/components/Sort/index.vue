@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, defineEmits } from "vue";
 
-const labelText = ref("NAME - DESC");
+const labelText = ref("");
 
 const emits = defineEmits(["sendSortOption"]);
 

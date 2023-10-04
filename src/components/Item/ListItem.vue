@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import Item from "../Item/Item.vue";
-import { ItemType } from '../../../data-types/item';
+import Item from "@components/Item/index.vue";
+import { ItemType } from '@/data-types/item';
 
 const props = defineProps<{
     items: ItemType[]
     filteredItems: ItemType[]
 }>()
 
-const items = ref<ItemType[]>(props.items.sort((a, b) => {
-    return b.name.localeCompare(a.name); 
-}));
+const items = ref<ItemType[]>(props.items);
 
 // Change the value displayed when filtering
 const itemsToDisplay = computed(() => {
@@ -27,9 +25,7 @@ const handleEditItem = (itemEdited: ItemType) => {
     items.value = items.value.map((item: ItemType) => (
         item.id === itemEdited.id ? itemEdited : item
     ));
-    
 }
-
 </script>
 
 <template>

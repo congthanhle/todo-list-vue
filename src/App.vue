@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Title from "./components/Title/Title.vue";
-import Search from "./components/Search/Search.vue";
-import Sort from "./components/Sort/Sort.vue";
-import Form from "./components/Form/Form.vue";
-import ListItem from "./components/Item/ListItem/ListItem.vue";
-import { ItemType } from "./data-types/item.ts";
+import Title from "@components/Title/index.vue";
+import Search from "@components/Search/index.vue";
+import Sort from "@components/Sort/index.vue";
+import Form from "@components/Form/index.vue";
+import ListItem from "@components/Item/ListItem.vue";
+import { ItemType } from "@/data-types/item.ts";
 import { items } from "./data";
 
 const isAddFormVisible = ref(false);
@@ -32,7 +32,7 @@ const getNewItem = (item: ItemType) => {
 
 const filteredData = (query: string) => {
   const searchQuery = query.toLowerCase();
-  filteredItems.value = items.filter((item) => {
+  filteredItems.value = newItems.value.filter((item) => {
     return item.name.toLowerCase().includes(searchQuery);
   });
 }
@@ -41,27 +41,27 @@ const handleSortOption = (option: string) => {
   newItems.value = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
   switch (option) {
     case "1":
-      newItems.value.sort((a, b) => {
-        return a.name.localeCompare(b.name);
+      newItems.value.sort((item1, item2) => {
+        return item1.name.localeCompare(item2.name);
       });
       break;
     case "2":
-    newItems.value.sort((a, b) => {
-        return b.name.localeCompare(a.name);
+      newItems.value.sort((item1, item2) => {
+        return item2.name.localeCompare(item1.name);
       });
       break;
     case "3":
-    newItems.value.sort((a, b) => {
-        return a.level - b.level;
+      newItems.value.sort((item1, item2) => {
+        return item1.level - item2.level;
       });
       break;
     case "4":
-    newItems.value.sort((a, b) => {
-        return b.level - a.level;
+      newItems.value.sort((item1, item2) => {
+        return item1.level - item2.level;
       });
       break;
     default:
-      
+
       break;
   }
 }
@@ -92,4 +92,3 @@ const handleSortOption = (option: string) => {
 </template>
 
 <style scoped></style>
-./data-types/item.ts

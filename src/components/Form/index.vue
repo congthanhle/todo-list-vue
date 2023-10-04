@@ -11,9 +11,14 @@ const formData = ref({
 
 // Handled when submitting the form
 const handleSubmitForm = () => {
-    const { name, level } = formData.value;
-    emits('sendNewItem', { name, level });
-    formData.value.name = '';
+    if(formData.value.name !== ""){
+        const { name, level } = formData.value;
+        emits('sendNewItem', { name, level });
+        formData.value.name = '';
+    }
+    else{
+        alert("Please enter item name");
+    }
 }
 
 // Operation to delete data on the form

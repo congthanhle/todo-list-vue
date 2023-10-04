@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
-import { ItemType } from '../../../data-types/item';
-import ItemEdit from '../ItemEdit/ItemEdit.vue';
+import { ItemType } from "@/data-types/item";
+import ItemEdit from '@components/Item/ItemEdit.vue';
 
 const emits = defineEmits(["sendIdDelItem", "sendEditItem"]);
 
