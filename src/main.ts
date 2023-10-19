@@ -1,6 +1,5 @@
-import { createApp } from 'vue'
-import '@assets/styles/index.css'
-import App from '@/App.vue';
-import { GetterTree } from 'vuex/types/index.js';
+import { createApp } from "vue";
+import "@assets/styles/index.css";
+import App from "@/App.vue";
 
-createApp(App).mount('#app')
+createApp(App).mount("#app");

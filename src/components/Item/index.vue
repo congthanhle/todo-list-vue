@@ -47,7 +47,7 @@ const sendEditItem = (item: ItemType) => {
             <button type="button" class="btn btn-danger btn-sm" @click="handleDeleteClick">Delete</button>
         </td>
     </tr>
-    <ItemEdit :item="item"  @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else/>
+    <ItemEdit :item="item" @cancelEditedItem="cancelEditItem" @sendEditedItem="sendEditItem" v-else />
 </template>
 
 <style scoped></style>

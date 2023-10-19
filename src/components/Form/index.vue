@@ -11,12 +11,12 @@ const formData = ref({
 
 // Handled when submitting the form
 const handleSubmitForm = () => {
-    if(formData.value.name !== ""){
+    if (formData.value.name !== "") {
         const { name, level } = formData.value;
         emits('sendNewItem', { name, level });
         formData.value.name = '';
     }
-    else{
+    else {
         alert("Please enter item name");
     }
 }

@@ -33,26 +33,21 @@ const handleSortOption = (value: string) => {
 
 
 <template>
-    <div class="dropdown">
-      <button
-        class="btn btn-default dropdown-toggle marginR5 "
-        type="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="true"
-      >
-        Sort by <span class="caret" />
-      </button>
-      <ul class="dropdown-menu">
-        <li><a @click="handleSortOption('1')" role="button">Name ASC</a></li>
-        <li><a @click="handleSortOption('2')" role="button">Name DESC</a></li>
-        <li role="separator" class="divider" />
-        <li><a @click="handleSortOption('3')" role="button">Level ASC</a></li>
-        <li><a @click="handleSortOption('4')" role="button">Level DESC</a></li>
-      </ul>
-      <span class="label label-success label-medium">{{ labelText }}</span>
-    </div>
-  </template>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle marginR5 " type="button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="true">
+      Sort by <span class="caret" />
+    </button>
+    <ul class="dropdown-menu">
+      <li><a @click="handleSortOption('1')" role="button">Name ASC</a></li>
+      <li><a @click="handleSortOption('2')" role="button">Name DESC</a></li>
+      <li role="separator" class="divider" />
+      <li><a @click="handleSortOption('3')" role="button">Level ASC</a></li>
+      <li><a @click="handleSortOption('4')" role="button">Level DESC</a></li>
+    </ul>
+    <span class="label label-success label-medium">{{ labelText }}</span>
+  </div>
+</template>
   
 
 <style scoped></style>
