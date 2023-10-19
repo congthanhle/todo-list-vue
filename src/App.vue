@@ -41,23 +41,23 @@ const handleSortOption = (option: string) => {
   newItems.value = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
   switch (option) {
     case "1":
-      newItems.value.sort((item1, item2) => {
-        return item1.name.localeCompare(item2.name);
+      newItems.value.sort((currentItem, nextItem) => {
+        return currentItem.name.localeCompare(nextItem.name);
       });
       break;
     case "2":
-      newItems.value.sort((item1, item2) => {
-        return item2.name.localeCompare(item1.name);
+      newItems.value.sort((currentItem, nextItem) => {
+        return nextItem.name.localeCompare(currentItem.name);
       });
       break;
     case "3":
-      newItems.value.sort((item1, item2) => {
-        return item1.level - item2.level;
+      newItems.value.sort((currentItem, nextItem) => {
+        return currentItem.level - nextItem.level;
       });
       break;
     case "4":
-      newItems.value.sort((item1, item2) => {
-        return item1.level - item2.level;
+      newItems.value.sort((currentItem, nextItem) => {
+        return nextItem.level - currentItem.level;
       });
       break;
     default:
