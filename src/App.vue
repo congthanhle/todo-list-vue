@@ -6,11 +6,11 @@ import Sort from "@components/Sort/index.vue";
 import Form from "@components/Form/index.vue";
 import ListItem from "@components/Item/ListItem.vue";
 import { ItemType } from "@/data-types/item.ts";
-import { items } from "./data";
+import { items as itemsData } from "./data";
 
 const isAddFormVisible = ref(false);
-const newItems = ref<ItemType[]>(items);
-const filteredItems = ref<ItemType[]>([]);
+const items = ref<ItemType[]>(itemsData);
+const originalData = ref<ItemType[]>(itemsData);
 
 const handleToggleAddBtn = () => {
   isAddFormVisible.value = !isAddFormVisible.value;
@@ -20,43 +20,56 @@ const handleHideAddForm = (isVisible: boolean) => {
   isAddFormVisible.value = isVisible;
 }
 
-const getNewItem = (item: ItemType) => {
-  const newId = items.length + 1;
+const addNewItem = (item: ItemType) => {
+  const newId = items.value.length + 1;
   const newItem = {
     id: newId,
     name: item.name,
     level: Number(item.level)
   }
-  newItems.value.push(newItem);
+  items.value = [newItem, ...items.value]
+  originalData.value = items.value
 }
 
-const filteredData = (query: string) => {
+const handleDeleteItem = (itemId: number) => {
+  items.value = items.value.filter(item => item.id !== itemId);
+  originalData.value = items.value
+}
+
+// Processes updating the edited content
+const handleEditItem = (itemEdited: ItemType) => {
+  items.value = items.value.map((item: ItemType) => (
+    item.id === itemEdited.id ? itemEdited : item
+  ));
+  originalData.value = items.value
+}
+
+const filterData = (query: string) => {
   const searchQuery = query.toLowerCase();
-  filteredItems.value = newItems.value.filter((item) => {
-    return item.name.toLowerCase().includes(searchQuery);
-  });
+    items.value = originalData.value.filter((item) => {
+      return item.name.toLowerCase().includes(searchQuery);
+    });
 }
 
 const handleSortOption = (option: string) => {
-  newItems.value = filteredItems.value.length !== 0 ? filteredItems.value : newItems.value;
   switch (option) {
     case "1":
-      newItems.value.sort((currentItem, nextItem) => {
+      items.value.sort((currentItem, nextItem) => {
         return currentItem.name.localeCompare(nextItem.name);
       });
       break;
     case "2":
-      newItems.value.sort((currentItem, nextItem) => {
+      items.value.sort((currentItem, nextItem) => {
         return nextItem.name.localeCompare(currentItem.name);
       });
       break;
     case "3":
-      newItems.value.sort((currentItem, nextItem) => {
+      items.value.sort((currentItem, nextItem) => {
         return currentItem.level - nextItem.level;
       });
       break;
     case "4":
-      newItems.value.sort((currentItem, nextItem) => {
+      items.value.sort((currentItem, nextItem) => {
         return nextItem.level - currentItem.level;
       });
       break;
@@ -73,7 +86,7 @@ const handleSortOption = (option: string) => {
     <Title />
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <Search @sendSearchQuery="filteredData" />
+        <Search @sendSearchQuery="filterData" />
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         <Sort @sendSortOption="handleSortOption" />
@@ -84,10 +97,10 @@ const handleSortOption = (option: string) => {
     </div>
     <div class="row marginB10">
       <div class="col-md-offset-7 col-md-5">
-        <Form v-if="isAddFormVisible" @sendNewItem="getNewItem" @cancelAddItem="handleHideAddForm" />
+        <Form v-if="isAddFormVisible" @sendNewItem="addNewItem" @cancelAddItem="handleHideAddForm" />
       </div>
     </div>
-    <ListItem :items="newItems" :filteredItems="filteredItems" />
+    <ListItem :items="items" @sendIdDelItem="handleDeleteItem" @sendEditItem="handleEditItem" />
   </div>
 </template>
 
